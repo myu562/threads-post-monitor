@@ -11,7 +11,6 @@
 | `/srv/threads-monitor` | 專案放在主機上的路徑 |
 | `threads.example.com` | 你的網域 |
 | `www-data` | 執行網站（PHP-FPM）的系統使用者；Debian/Ubuntu 預設是它，CentOS/RHEL 常見的是 `nginx` 或 `apache` |
-| `<repo-url>` | 這個專案的 git 網址 |
 
 兩個習慣可以避開大部分問題：
 
@@ -79,7 +78,7 @@ composer --version                                  # Composer version 2.x
 ### 1.1 只想先在自己電腦試用
 
 ```bash
-git clone <repo-url> threads-monitor
+git clone https://github.com/myu562/threads-post-monitor.git threads-monitor
 cd threads-monitor
 composer install --no-dev
 php artisan threads:install
@@ -99,7 +98,7 @@ php artisan serve
 ```bash
 sudo mkdir -p /srv/threads-monitor
 sudo chown "$USER":www-data /srv/threads-monitor
-git clone <repo-url> /srv/threads-monitor
+git clone https://github.com/myu562/threads-post-monitor.git /srv/threads-monitor
 cd /srv/threads-monitor
 ```
 

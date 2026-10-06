@@ -3,7 +3,13 @@
 # of the sha256 of the whole entry line>. These entries exempt text from the checks, so the
 # export fails while this list and the allowlist disagree: review every changed entry by hand,
 # then run scripts/export-public.sh --update-allowlist-lock.
+exact-line 68f15ea8b333
 exact-line 7346a7406e88
+exact-line 7b39db4c7e40
+exact-line 946fe4323066
+exact-line bc4886dae756
+exact-line bc72a031cadd
+exact-line f3171a27d526
 exact-line f5c56534b4e9
 password-value 0753fba3253c
 password-value 15166d86050b

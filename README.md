@@ -69,7 +69,7 @@ The details (the source of every field, what the view count really is, how share
 Requires PHP 8.3 or newer (with the `bcmath`, `curl`, `mbstring`, `xml` and `pdo_sqlite` extensions) and Composer. To just try it on your own computer:
 
 ```bash
-git clone <repo-url> threads-monitor
+git clone https://github.com/myu562/threads-post-monitor.git threads-monitor
 cd threads-monitor
 composer install --no-dev
 php artisan threads:install

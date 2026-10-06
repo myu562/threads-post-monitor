@@ -67,7 +67,7 @@
 需要 PHP 8.3 以上（含 `bcmath`、`curl`、`mbstring`、`xml`、`pdo_sqlite` 擴充）與 Composer。只想在自己電腦上試用：
 
 ```bash
-git clone <repo-url> threads-monitor
+git clone https://github.com/myu562/threads-post-monitor.git threads-monitor
 cd threads-monitor
 composer install --no-dev
 php artisan threads:install

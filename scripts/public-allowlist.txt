@@ -139,6 +139,14 @@ env-value:Powered by Your Name
 env-value:https://example.com/
 env-value:0-24:60,24-72:180
 
+# --- exact lines with the public repository URL (its owner handle is public on GitHub) ---
+exact-line:README.md|name|git clone https://github.com/myu562/threads-post-monitor.git threads-monitor
+exact-line:README.zh-TW.md|name|git clone https://github.com/myu562/threads-post-monitor.git threads-monitor
+exact-line:docs/SELF-HOSTING.md|name|git clone https://github.com/myu562/threads-post-monitor.git threads-monitor
+exact-line:docs/SELF-HOSTING.md|name|git clone https://github.com/myu562/threads-post-monitor.git /srv/threads-monitor
+exact-line:docs/SELF-HOSTING.zh-TW.md|name|git clone https://github.com/myu562/threads-post-monitor.git threads-monitor
+exact-line:docs/SELF-HOSTING.zh-TW.md|name|git clone https://github.com/myu562/threads-post-monitor.git /srv/threads-monitor
+
 # --- exact lines that may name the owner (config footer credit defaults) ---
 exact-line:config/threads.php|name,facebook|        'text' => env('THREADS_FOOTER_TEXT', 'Powered by Sony Chou'),
 exact-line:config/threads.php|name,facebook|        'url' => env('THREADS_FOOTER_URL', 'https://www.facebook.com/geoffrey.chou'),

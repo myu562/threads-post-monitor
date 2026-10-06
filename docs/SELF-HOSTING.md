@@ -11,7 +11,6 @@ All values below are examples; replace them with your own:
 | `/srv/threads-monitor` | Where the project lives on the server |
 | `threads.example.com` | Your domain |
 | `www-data` | The system user that runs the website (PHP-FPM); the default on Debian/Ubuntu. On CentOS/RHEL it is often `nginx` or `apache` |
-| `<repo-url>` | The git URL of this project |
 
 Two habits prevent most problems:
 
@@ -79,7 +78,7 @@ If an extension is missing, install the matching `php8.3-<name>` package (`pdo_s
 ### 1.1 Just trying it on your own computer
 
 ```bash
-git clone <repo-url> threads-monitor
+git clone https://github.com/myu562/threads-post-monitor.git threads-monitor
 cd threads-monitor
 composer install --no-dev
 php artisan threads:install
@@ -99,7 +98,7 @@ Do these steps in order and **then continue with section 2 in order**. Do not ad
 ```bash
 sudo mkdir -p /srv/threads-monitor
 sudo chown "$USER":www-data /srv/threads-monitor
-git clone <repo-url> /srv/threads-monitor
+git clone https://github.com/myu562/threads-post-monitor.git /srv/threads-monitor
 cd /srv/threads-monitor
 ```
 
