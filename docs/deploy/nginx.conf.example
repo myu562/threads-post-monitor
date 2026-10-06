@@ -1,0 +1,48 @@
+# nginx site for Threads Monitor.
+# Copy to /etc/nginx/sites-available/threads-monitor.conf, adjust the three marked lines,
+# enable it, then run `sudo nginx -t && sudo systemctl reload nginx`.
+# HTTPS: run `sudo certbot --nginx -d threads.example.com` afterwards; certbot adds the 443 block.
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name threads.example.com;              # <- 1. your domain
+
+    root /srv/threads-monitor/public;              # <- 2. <project path>/public (never the project root)
+    index index.php;
+    charset utf-8;
+
+    client_max_body_size 1m;
+
+    # Security headers (X-Frame-Options, X-Content-Type-Options, Referrer-Policy,
+    # CSP frame-ancestors) are sent by the application itself; do not repeat them here.
+
+    # HSTS: tells browsers to use HTTPS only, for a year. certbot turns this server block into the
+    # TLS (443) block. Uncomment only after https:// works and the certificate renews
+    # (`sudo certbot renew --dry-run`); once browsers have seen it, going back to plain HTTP fails.
+    # add_header Strict-Transport-Security "max-age=31536000" always;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    location ~ ^/index\.php(/|$) {
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock; # <- 3. your PHP-FPM socket
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        include fastcgi_params;
+        fastcgi_hide_header X-Powered-By;
+    }
+
+    # Hidden files (.env, .git, ...) are never served.
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+
+    # Any other .php file is not an entry point.
+    location ~ \.php$ {
+        return 404;
+    }
+}

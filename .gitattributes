@@ -1,0 +1,24 @@
+* text=auto eol=lf
+
+*.blade.php diff=html
+*.css diff=css
+*.html diff=html
+*.md diff=markdown
+*.php diff=php
+
+# The export allowlist and its review lock change only together and only after a human review:
+# never auto-merge them (scripts/export-public.sh fails while they disagree).
+/scripts/public-allowlist.txt merge=binary
+/scripts/public-allowlist.lock text eol=lf merge=binary
+
+/.github export-ignore
+CHANGELOG.md export-ignore
+.styleci.yml export-ignore
+
+# Not part of the public export (scripts/export-public.sh also refuses any file outside scripts/public-allowlist.txt)
+/resources/views/personal export-ignore
+/public/personal export-ignore
+/resources/css/personal export-ignore
+/standalone/**/bin/** export-ignore
+/standalone/**/obj/** export-ignore
+/standalone/**/dist/** export-ignore

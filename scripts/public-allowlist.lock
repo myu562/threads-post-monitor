@@ -1,0 +1,26 @@
+# Review lock for public-allowlist.txt, written by scripts/export-public.sh --update-allowlist-lock.
+# One line per exact-line: and password-value: entry of the allowlist: <kind> <first 12 hex digits
+# of the sha256 of the whole entry line>. These entries exempt text from the checks, so the
+# export fails while this list and the allowlist disagree: review every changed entry by hand,
+# then run scripts/export-public.sh --update-allowlist-lock.
+exact-line 7346a7406e88
+exact-line f5c56534b4e9
+password-value 0753fba3253c
+password-value 15166d86050b
+password-value 16fcd331b361
+password-value 311d430ae98f
+password-value 36f0ecaf6b82
+password-value 3fd3d99e4f51
+password-value 40536e3a6370
+password-value 4206042a1352
+password-value 494b450c31bd
+password-value 62fd034795bc
+password-value 78ee7d5ebb5c
+password-value 7c661e50024a
+password-value b6117dd377c3
+password-value ca294491bd0e
+password-value d9f4b2c54e28
+password-value df32e08e7d26
+password-value ee8bef9197fa
+password-value f6f75ce9d200
+password-value faddb5d691ea

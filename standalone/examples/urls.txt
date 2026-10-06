@@ -1,0 +1,22 @@
+# ThreadsMonitor - example urls.txt (all accounts and codes below are made up)
+# One Threads post URL per line. Lines starting with "# " are comments.
+# "## name" starts a group: the posts below it get their folders inside a folder with that name.
+# Posts before the first group go to "Ungrouped" (未分組 on a Chinese system).
+# Tags and a note may follow the URL after a space:  <URL> #tag #tag | note
+# A "#" right after the URL (no space) belongs to the URL, not a tag.
+# Filter by tag in Excel (index.csv, tags column) or with: ThreadsMonitor status --tag video
+# Search tags, notes and post text with: ThreadsMonitor search sale
+
+https://www.threads.com/@example_user/post/DFakeP0st01 #video
+
+## Client A
+https://www.threads.com/@example_user/post/DFakeP0st02 #video #launch | first post of the campaign
+https://www.threads.com/t/CFake_Old01
+
+## Autumn sale
+https://www.threads.com/share/ShareFake01/ #sale | shared by the client
+
+##
+# A line with only "##" ends the group: URLs pasted below it go to "Ungrouped" again,
+# not into the group above. To start a new group, write "## name" (without the "# ").
+# ## Client B

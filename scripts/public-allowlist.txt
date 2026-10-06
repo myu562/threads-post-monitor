@@ -1,0 +1,169 @@
+# Allowlist for scripts/export-public.sh — this file is public and is exported with the code.
+#
+# The export fails closed: every file in the exported tree must match one of the path globs below
+# AND have an extension from the ext: list (or be a noext: name). Anything else is reported and the
+# export fails. Add a line here only after checking that the new kind of file is safe to publish.
+#
+# Format (one entry per line; blank lines and lines starting with # are ignored):
+#   <glob>              path relative to the repository root; ** = any depth, * and ? stay inside one
+#                       directory level; matching is case-sensitive
+#   ext:<extension>     allowed file extension (the part after the last dot of the file name)
+#   noext:<name>        allowed file name without an extension
+#   binary:<path>       exact path of a file that may be binary (no other file may be)
+#   exclude:<glob>      never published, even inside an allowed glob (exclusions win)
+#   exact-line:<path>|<categories>|<line>
+#                       the exact full line (no trailing spaces) in <path> that may contain the owner's
+#                       name and/or a facebook.com link; <categories> is name, facebook or both. Every
+#                       other rule still applies to that line, and nowhere else is exempt.
+#   invisible:<path> U+XXXX   that invisible character may appear in that file (e.g. a BOM literal)
+#   password-value:<value>    a fake password (or fake secret/token) used by tests or docs; matched
+#                       exactly, also for the long hex/base64 secret rule
+#   ip-value:<value>    a dotted number that is not an address (e.g. a version)
+#   env-value:<value>   allowed value in .env.example (besides empty, small integers, true/false/null
+#                       and ${OTHER_KEY} references); applies to commented-out KEY= lines and to
+#                       KEY=value written inside comment text too
+#
+# exact-line: and password-value: entries exempt text from the checks, so each one is recorded in
+# public-allowlist.lock (first 12 hex digits of the sha256 of the entry line). The export fails while
+# the two disagree: review every changed entry by hand, then run
+# scripts/export-public.sh --update-allowlist-lock and commit both files together.
+
+# --- application code ---
+app/**
+bootstrap/app.php
+bootstrap/providers.php
+bootstrap/cache/.gitignore
+config/**
+database/.gitignore
+database/migrations/**
+database/factories/**
+database/seeders/**
+public/**
+resources/**
+lang/**
+routes/**
+tests/**
+storage/**/.gitignore
+
+# --- the owner's personal styling layer: never public (also export-ignore in .gitattributes) ---
+exclude:resources/views/personal/**
+exclude:public/personal/**
+exclude:resources/css/personal/**
+
+# --- documentation ---
+README*.md
+LICENSE
+docs/HOW-IT-WORKS*.md
+docs/SELF-HOSTING*.md
+docs/deploy/*
+
+# --- the export tool itself ---
+scripts/export-public.sh
+scripts/public-allowlist.txt
+scripts/public-allowlist.lock
+
+# --- standalone (folder) edition ---
+standalone/src/**
+standalone/tests/**
+standalone/examples/**
+standalone/*.md
+standalone/*.sln
+standalone/build.sh
+standalone/scripts/*.sh
+standalone/.gitignore
+
+# --- root project files ---
+artisan
+composer.json
+composer.lock
+package.json
+phpunit.xml
+vite.config.js
+.editorconfig
+.env.example
+.gitattributes
+.gitignore
+
+# --- allowed extensions ---
+ext:php
+ext:cs
+ext:csproj
+ext:sln
+ext:md
+ext:json
+ext:lock
+ext:js
+ext:css
+ext:html
+ext:xml
+ext:yml
+ext:yaml
+ext:txt
+ext:sh
+ext:example
+ext:ico
+ext:svg
+ext:gitignore
+ext:gitattributes
+ext:editorconfig
+ext:htaccess
+noext:artisan
+noext:LICENSE
+
+# --- the only files that may be binary ---
+binary:public/favicon.ico
+
+# --- placeholder values allowed in .env.example ---
+env-value:Threads Monitor
+env-value:production
+env-value:http://localhost
+env-value:en
+env-value:en_US
+env-value:file
+env-value:stack
+env-value:single
+env-value:warning
+env-value:sqlite
+env-value:mysql
+env-value:127.0.0.1
+env-value:threads_monitor
+env-value:change-me
+env-value:database
+env-value:/
+env-value:log
+env-value:local
+env-value:hello@example.com
+env-value:Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+env-value:Asia/Taipei
+env-value:Powered by Your Name
+env-value:https://example.com/
+env-value:0-24:60,24-72:180
+
+# --- exact lines that may name the owner (config footer credit defaults) ---
+exact-line:config/threads.php|name,facebook|        'text' => env('THREADS_FOOTER_TEXT', 'Powered by Sony Chou'),
+exact-line:config/threads.php|name,facebook|        'url' => env('THREADS_FOOTER_URL', 'https://www.facebook.com/geoffrey.chou'),
+
+
+# --- fake passwords in tests and docs ---
+password-value:a-long-password-1
+password-value:fake-db-pass-9876
+password-value:another-fake-password-456
+password-value:brand-new-password-1
+password-value:a-password-of-at-least-12-chars
+password-value:another-password-2
+password-value:brand-new-password
+password-value:correct-horse-battery
+password-value:stale-hash
+password-value:different-password
+password-value:fake-installer-password-123
+password-value:hashed
+password-value:not-my-password
+password-value:replace-with-a-long-password
+password-value:short-pw
+password-value:something-else-123
+password-value:fake-env-pass-5432
+password-value:s3cret
+password-value:pa55word
+
+# --- dotted numbers that are versions, not addresses ---
+ip-value:1.54.0.1

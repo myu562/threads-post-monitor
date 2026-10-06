@@ -1,0 +1,11 @@
+# Threads Monitor scheduler. Laravel's scheduler must run every minute; it decides by itself
+# what is due (threads:poll-due every 5 minutes, threads:prune-raw once a day).
+# `php artisan threads:install` prints this line with your real project path and the full path
+# of the PHP binary filled in. Use the full path (e.g. /usr/bin/php8.3, see `command -v php8.3`):
+# cron's plain `php` may point to another PHP version when several are installed.
+
+# Option A: crontab of the user that owns the web files (e.g. `sudo crontab -u www-data -e`):
+* * * * * cd /srv/threads-monitor && /usr/bin/php8.3 artisan schedule:run >> /dev/null 2>&1
+
+# Option B: a system file /etc/cron.d/threads-monitor (note the extra user column):
+# * * * * * www-data cd /srv/threads-monitor && /usr/bin/php8.3 artisan schedule:run >> /dev/null 2>&1
